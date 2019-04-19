@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\haun2\source\repos\PE_viewer\PE_viewer\main.cpp(33): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+  PE_viewer.vcxproj -> C:\Users\haun2\source\repos\PE_viewer\Debug\PE_viewer.exe
