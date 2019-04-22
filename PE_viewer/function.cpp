@@ -82,3 +82,23 @@ void __view_nt_header(_NT_HEADER* data)
 	}
 	printf("=================================================\n");
 	}
+void __view_section_header(SECTION_HEADER* data, int cnt)
+{
+	printf("=====================SECTION_HEADER=====================\n");
+	printf("--------------------------------------------------------\n");
+	for (int i = 0; i < cnt; i++)
+	{
+		printf("Name : %s\n", data[i].Name+1);
+		printf("Virtual Size : 0x%08X\n", data[i].Misc.VirtualSize);
+		printf("Virtual address : 0x%08X\n", data[i].VirtualAddress);
+		printf("Size of Raw data : 0x%08X\n", data[i].SizeOfRawData);
+		printf("Pointer to Raw data: 0x%08X\n", data[i].PointerToRawData);
+		printf("Pointer to relocations : 0x%08X\n", data[i].PointerToRelocations);
+		printf("Pointer to line numbers : 0x%08X\n", data[i].PointerToLinenumbers);
+		printf("Number of relocations : 0x%04X\n", data[i].NumberOfRelocations);
+		printf("Number of Line Numbers : 0x%04X\n", data[i].NumberOfLinenumbers);
+		printf("Characteristics : 0x%08X\n", data[i].Characteristics);
+		printf("--------------------------------------------------------\n");
+	}
+	printf("========================================================\n");
+}

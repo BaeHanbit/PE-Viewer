@@ -1,5 +1,6 @@
 #pragma once
 #include "header.h"
+#define IMAGE_SIZEOF_SHORT_NAME 8
 
 typedef long LONG;
 typedef unsigned char BYTE;
@@ -90,56 +91,18 @@ typedef struct _NT_HEADER {
 	OPTIONAL_HEADER OptionalHeader;
 }NT_HEADER;
 
-
-
-/*
-DataDirectory[0] = EXPORT Directory
-DataDirectory[1] = IMPORT Directory
-DataDirectory[2] = RESOURCE Directory
-DataDirectory[3] = EXCEPTION Directory
-DataDirectory[4] = SECURITY Directory
-DataDirectory[5] = BASERELOC Directory
-DataDirectory[6] = DEBUG Directory
-DataDirectory[7] = COPYRIGHT Directory
-DataDirectory[8] = GLOBALPTR Directory
-DataDirectory[9] = TLS Directory
-DataDirectory[A] = LOAD_CONFIG Directory
-DataDirectory[B] = BOUND_IMPORT Directory
-DataDirectory[C] = IAT Directory
-DataDirectory[D] = DELAY_IMPORT Directory
-DataDirectory[E] = COM_DESCRIPTOR Directory
-DataDirectory[F] = Reserved Directory
-
-00000158 00000000 RVA  of EXPORT Directory
-0000015C 00000000 size of EXPORT Directory
-00000160 00007604 RVA  of IMPORT Directory
-00000164 000000C8 size of IMPORT Directory
-00000168 0000B000 RVA  of RESOURCE Directory
-0000016C 00008304 size of RESOURCE Directory
-00000170 00000000 RVA  of EXCEPTION Directory
-00000174 00000000 size of EXCEPTION Directory
-00000178 00000000 RVA  of SECURITY Directory
-0000017C 00000000 size of SECURITY Directory
-00000180 00000000 RVA  of BASERELOC Directory
-00000184 00000000 size of BASERELOC Directory
-00000188 00001350 RVA  of DEBUG Directory
-0000018C 0000001C size of DEBUG Directory
-00000190 00000000 RVA  of COPYRIGHT Directory
-00000194 00000000 size of COPYRIGHT Directory
-00000198 00000000 RVA  of GLOBALPTR Directory
-0000019C 00000000 size of GLOBALPTR Directory
-000001A0 00000000 RVA  of TLS Directory
-000001A4 00000000 size of TLS Directory
-000001A8 000018A8 RVA  of LOAD_CONFIG Directory
-000001AC 00000040 size of LOAD_CONFIG Directory
-000001B0 00000250 RVA  of BOUND_IMPORT Directory
-000001B4 000000D0 size of BOUND_IMPORT Directory
-000001B8 00001000 RVA  of IAT Directory
-000001BC 00000348 size of IAT Directory
-000001C0 00000000 RVA  of DELAY_IMPORT Directory
-000001C4 00000000 size of DELAY_IMPORT Directory
-000001C8 00000000 RVA  of COM_DESCRIPTOR Directory
-000001CC 00000000 size of COM_DESCRIPTOR Directory
-000001D0 00000000 RVA  of Reserved Directory
-000001D4 00000000 size of Reserved Directory
-*/
+typedef struct _SECTION_HEADER {
+	BYTE    Name[IMAGE_SIZEOF_SHORT_NAME];
+	union {
+		DWORD   PhysicalAddress;
+		DWORD   VirtualSize;
+	} Misc;
+	DWORD   VirtualAddress;
+	DWORD   SizeOfRawData;
+	DWORD   PointerToRawData;
+	DWORD   PointerToRelocations;
+	DWORD   PointerToLinenumbers;
+	WORD    NumberOfRelocations;
+	WORD    NumberOfLinenumbers;
+	DWORD   Characteristics;
+}SECTION_HEADER;
