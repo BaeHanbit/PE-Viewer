@@ -6,6 +6,8 @@ typedef long LONG;
 typedef unsigned char BYTE;
 typedef unsigned short WORD;
 typedef unsigned long DWORD;
+typedef unsigned __int64 ULONGLONG;
+
 
 
 typedef struct _DOS_HEADER {    // DOS .EXE header
@@ -45,7 +47,7 @@ typedef struct _DATA_DIRECTORY{
 	DWORD   Size;
 }DATA_DIRECTORY;
 
-typedef struct _OPTIONAL_HEADER {
+typedef struct _OPTIONAL_HEADER32{
 	//
 	// Standard fields.
 	// 
@@ -83,13 +85,52 @@ typedef struct _OPTIONAL_HEADER {
 	DWORD   LoaderFlags;
 	DWORD   NumberOfRvaAndSizes;
 	DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
-}OPTIONAL_HEADER;
+}OPTIONAL_HEADER32;
 
-typedef struct _NT_HEADER {
+typedef struct _OPTIONAL_HEADER64 {
+	WORD        Magic;
+	BYTE        MajorLinkerVersion;
+	BYTE        MinorLinkerVersion;
+	DWORD       SizeOfCode;
+	DWORD       SizeOfInitializedData;
+	DWORD       SizeOfUninitializedData;
+	DWORD       AddressOfEntryPoint;
+	DWORD       BaseOfCode;
+	ULONGLONG   ImageBase;
+	DWORD       SectionAlignment;
+	DWORD       FileAlignment;
+	WORD        MajorOperatingSystemVersion;
+	WORD        MinorOperatingSystemVersion;
+	WORD        MajorImageVersion;
+	WORD        MinorImageVersion;
+	WORD        MajorSubsystemVersion;
+	WORD        MinorSubsystemVersion;
+	DWORD       Win32VersionValue;
+	DWORD       SizeOfImage;
+	DWORD       SizeOfHeaders;
+	DWORD       CheckSum;
+	WORD        Subsystem;
+	WORD        DllCharacteristics;
+	ULONGLONG   SizeOfStackReserve;
+	ULONGLONG   SizeOfStackCommit;
+	ULONGLONG   SizeOfHeapReserve;
+	ULONGLONG   SizeOfHeapCommit;
+	DWORD       LoaderFlags;
+	DWORD       NumberOfRvaAndSizes;
+	IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
+} OPTIONAL_HEADER64;
+
+typedef struct _NT_HEADER32 {
 	DWORD Signature;
 	_FILE_HEADER FileHeader;
-	OPTIONAL_HEADER OptionalHeader;
-}NT_HEADER;
+	OPTIONAL_HEADER32 OptionalHeader;
+}NT_HEADER32;
+
+typedef struct _NT_HEADER64 {
+	DWORD Signature;
+	_FILE_HEADER FileHeader;
+	OPTIONAL_HEADER64 OptionalHeader;
+}NT_HEADER64;
 
 typedef struct _SECTION_HEADER {
 	BYTE    Name[IMAGE_SIZEOF_SHORT_NAME];
